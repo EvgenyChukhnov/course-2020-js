@@ -8,11 +8,13 @@
   "rules": {
     "semi": "off",
     "comma-dangle": ["error", "never"],
-    "max-len": ["error", { "code": 85 }],
+    "max-len": ["error", { "code": 90 }],
     "eol-last": ["error", "never"],
     "arrow-parens": "off",
     "require-jsdoc": "off",
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": ["error", "windows"],
+    "object-curly-spacing": "off",
+    "no-debugger":"off"
   },
   "extends": [ "eslint:recommended", "google" ]
 }
