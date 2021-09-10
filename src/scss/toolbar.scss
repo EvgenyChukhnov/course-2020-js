@@ -1,9 +1,9 @@
 @import "variables";
 @import "mixins";
 
-.exel__toolbar {
+.excel__toolbar {
   background: rgb(220, 234, 238);
-
+  display: flex;
   position: absolute;
   top: $header-height;
   left: 0;
@@ -12,7 +12,6 @@
   border-top: 1px solid $border-color;
   border-bottom: 1px solid $border-color;
   padding: 7px 10px;
-  display: flex;
 
   .button {
     @include button();
