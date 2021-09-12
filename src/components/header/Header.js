@@ -24,11 +24,7 @@ export class Header extends ExcelComponent {
     `
   }
 
-  onInput() {
-    console.log('Header.js - onInput')
-  }
+  onInput() {}
 
-  onClick() {
-    console.log('Header.js - onClick')
-  }
+  onClick() {}
 }
