@@ -1,7 +1,7 @@
 class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string' ?
-      document.querySelector(selector) : selector
+    document.querySelector(selector) : selector
   }
 
   html(html) {
@@ -45,6 +45,14 @@ class Dom {
 
   getCoords() {
     return this.$el.getBoundingClientRect()
+  }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach(el => this.$el.style[el] = styles[el])
   }
 }
 

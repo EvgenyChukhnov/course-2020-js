@@ -20,7 +20,7 @@ function toChar(_, i) {
   return String.fromCharCode(CODES.A + i)
 }
 
-function toColumn(el, i) {
+function toColumn(el) {
   return `
     <div class="column"
     data-type="resizable"
