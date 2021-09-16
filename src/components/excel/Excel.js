@@ -13,10 +13,7 @@ export class Excel {
     this.components = this.components.map(Component => {
       const $innerEl = $.create('div', Component.className)
       const component = new Component($innerEl)
-      // DEBUG
-      // window['G' + component.name] = component
-      // GFormula.destroy() - удаляет слушателей с Формулы
-      // GHeader.destroy() - удаляет слушателей с Хедера
+
       $innerEl.html(component.toHTML())
       $root.append($innerEl)
       return component
