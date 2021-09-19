@@ -1,18 +1,23 @@
 import { $ } from '@core/dom';
 import { ExcelComponent } from '@core/ExcelComponent';
-import { createTable } from './table.template';
 import { resizeHandler } from './table.resize';
-import { isCell, shouldReszie } from './table.functions';
+import { createTable } from './table.template';
 import { TableSelection } from './TableSelection';
-import { multiplySelectCells } from './table.functions';
+import {
+  isCell,
+  shouldReszie,
+  multiplySelectCells,
+  nextSelector
+} from './table.functions';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
-      listeners: ['mousedown'],
-      name: 'Table'
+      name: 'Table',
+      listeners: ['mousedown', 'keydown', 'input'],
+      ...options
     })
   }
 
@@ -26,8 +31,15 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init()
-    const $cell = this.$root.find('[data-id="A:1"]')
+    this.selectCell(this.$root.find('[data-id="A:1"]'))
+    // подписки на events:
+    this.$on('formula:input', text => this.selection.current.text(text)) // вставка текста
+    this.$on('formula:done', () => this.selection.current.focus()) // фокус на ячейку
+  }
+
+  selectCell($cell) {
     this.selection.select($cell)
+    this.$emit('table:select', $cell)
   }
 
   onMousedown(event) {
@@ -42,8 +54,34 @@ export class Table extends ExcelComponent {
       } else if (event.ctrlKey) {
         this.selection.selectCtrl($target)
       } else {
-        this.selection.select($target)
+        this.selectCell($target)
       }
     }
+  }
+
+  onKeydown(event) {
+    const keys = [
+      'Shift',
+      'Tab',
+      'Control',
+      'ArrowLeft',
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowRight',
+      'Enter'
+    ]
+
+    const {key} = event
+    if (keys.includes(event.key) && !event.shiftKey) {
+      event.preventDefault()
+
+      const id = this.selection.current.idNum(true)
+      const $next = this.$root.find(nextSelector(key, id))
+      this.selectCell($next)
+    }
+  }
+
+  onInput(event) {
+    this.$emit('table:input', $(event.target))
   }
 }

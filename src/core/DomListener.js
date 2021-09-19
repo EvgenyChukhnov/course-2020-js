@@ -1,11 +1,11 @@
-import { capitalize } from './utils'
+import { getMethodName } from './utils'
 
 export class DomListener {
-  constructor($root, listeners = [], name) {
+  constructor($root, options) {
     if (!$root) throw new Error(`No $root provided for DomListener!`)
     this.$root = $root
-    this.listeners = listeners
-    this.name = name
+    this.listeners = options.listeners
+    this.name = options.name
   }
 
   initDOMListeners() {
@@ -25,8 +25,4 @@ export class DomListener {
       this.$root.off(listener, this[method])
     })
   }
-}
-
-function getMethodName(eventName) {
-  return 'on' + capitalize(eventName)
 }

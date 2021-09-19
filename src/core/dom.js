@@ -6,6 +6,7 @@ class Dom {
 
   addClass(className) {
     this.$el.classList.add(className)
+    return this
   }
 
   append(node) {
@@ -37,6 +38,11 @@ class Dom {
 
   findAll(selector) {
     return this.$el.querySelectorAll(selector)
+  }
+
+  focus() {
+    this.$el.focus()
+    return this
   }
 
   get data() {
@@ -87,6 +93,18 @@ class Dom {
 
   removeClass(className) {
     this.$el.classList.remove(className)
+    return this
+  }
+
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim()
+    }
+    return this.$el.textContent.trim()
   }
 }
 

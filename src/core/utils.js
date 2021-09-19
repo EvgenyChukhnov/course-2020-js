@@ -10,3 +10,7 @@ export function range(start, end) {
   } else if (start > end) [start, end] = [end, start]
   return new Array(end - start + 1).fill('').map((_, index) => start + index)
 }
+
+export function getMethodName(eventName) {
+  return 'on' + capitalize(eventName)
+}
