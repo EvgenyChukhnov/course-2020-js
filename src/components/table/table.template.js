@@ -32,19 +32,22 @@ function toColumn(el) {
   `
 }
 
-function toCell(el, i,) {
+function toCell(row, i) {
   return `
     <div class="cell"
         draggable="false"
-        data-row="${el}"
-        data-col="${toChar(el, i)}"
+        data-row="${row}"
+        data-col="${toChar(row, i)}"
+        data-col-num="${i + 1}"
+        data-id="${toChar(row, i)}:${row}"
+        data-id-num="${i + 1}:${row}"
         contenteditable>
     </div>
   `
 }
 
-export function createTable(rowsCount = 10) {
-  const colsCount = CODES.Z - CODES.A + 1
+export function createTable(rowsCount = 10) {// rowsAmount (rowsAmt) ???
+  const colsCount = CODES.Z - CODES.A + 1 // colsAmt ???
   const rows = []
 
   const cols = new Array(colsCount)
@@ -55,12 +58,12 @@ export function createTable(rowsCount = 10) {
 
   rows.push(createRow(null, cols))
 
-  for (let i = 1; i <= rowsCount; i++) {
+  for (let row = 1; row <= rowsCount; row++) {
     const cell = new Array(colsCount)
-        .fill(`${i}`)
+        .fill(`${row}`)
         .map(toCell)
         .join('')
-    rows.push(createRow(i, cell))
+    rows.push(createRow(row, cell))
   }
 
   return rows.join('')
