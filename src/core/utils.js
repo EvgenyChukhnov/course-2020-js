@@ -14,3 +14,11 @@ export function range(start, end) {
 export function getMethodName(eventName) {
   return 'on' + capitalize(eventName)
 }
+
+export function storage(key, data = null) {
+  if (!data) {
+    return JSON.parse(localStorage.getItem(key))
+  } else {
+    localStorage.setItem(key, JSON.stringify(data))
+  }
+}

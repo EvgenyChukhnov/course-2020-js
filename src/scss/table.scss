@@ -6,7 +6,7 @@
   left: 0;
   right: 0;
   top: $header-height + $toolbar-height + $formula-height;
-  overflow: auto;
+  overflow-y: hidden;
   padding-bottom: 2px;
 
   .row {
@@ -61,7 +61,7 @@
 
     &.selected {
       border: none;
-      outline: 2px solid $primary-color;
+      outline: 2px solid $cell-selected-border-color;
       z-index: 2;
     }
   }
@@ -82,6 +82,7 @@
     top: 0;
     right: 0;
     width: 4px;
+    height: 100vh;
 
     &:hover {
       cursor: col-resize;
@@ -92,6 +93,7 @@
     left: 0;
     right: 0;
     height: 4px;
+    width: 100vw;
 
     &:hover {
       cursor: row-resize;

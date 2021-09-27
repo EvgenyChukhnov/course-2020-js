@@ -14,7 +14,8 @@
     "require-jsdoc": "off",
     "linebreak-style": ["error", "windows"],
     "object-curly-spacing": "off",
-    "no-debugger":"off"
+    "no-debugger":"off",
+    "indent": ["warn", 2, { "ignoreComments": true }]
   },
   "extends": [ "eslint:recommended", "google" ]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { range } from '@core/utils';
 
 export function shouldReszie(event) {
