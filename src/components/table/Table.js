@@ -33,10 +33,11 @@ export class Table extends ExcelComponent {
     super.init()
     this.selectCell(this.$root.find('[data-id="A:1"]'))
     // подписки на events:
-    this.$on('formula:input', text => this.selection.current.text(text)) // вставка текста
+    this.$on('formula:input', text => {
+      this.selection.current.text(text)
+      this.updateTextInStore(text)
+    }) // вставка текста
     this.$on('formula:done', () => this.selection.current.focus()) // фокус на ячейку
-// === console.log ==============================
-    // this.$subscribe(state => console.log('Table State:', state))
   }
 
   selectCell($cell) {
@@ -93,6 +94,14 @@ export class Table extends ExcelComponent {
   }
 
   onInput(event) {
-    this.$emit('table:input', $(event.target))
+    // this.$emit('table:input', $(event.target))
+    this.updateTextInStore($(event.target).text())
+  }
+
+  updateTextInStore(value) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.current.idNum(), // id ??
+      value
+    }))
   }
 }

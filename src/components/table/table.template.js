@@ -44,7 +44,11 @@ function toColumn({col, index, width}) {
 
 function toCell(state, row) {
   return function(_, i) {
-    const width = getWidth(state, i)
+    // console.log('state:', state.dataState[`${row}:${i}`])
+    const width = getWidth(state.colState, i)
+    const idNum = `${i + 1}:${row}`
+    const data = state.dataState[idNum] || ''
+
     return `
       <div class="cell"
         draggable="false"
@@ -53,8 +57,8 @@ function toCell(state, row) {
         data-col="${toChar(row, i)}"
         data-col-num="${i + 1}"
         data-id="${toChar(row, i)}:${row}"
-        data-id-num="${i + 1}:${row}"
-        contenteditable>
+        data-id-num="${idNum}"
+        contenteditable>${data}
       </div>
     `
   }
@@ -91,7 +95,7 @@ export function createTable(rowsCount = 10, state = {}) {// rowsAmount (rowsAmt)
   for (let row = 1; row <= rowsCount; row++) {
     const cells = new Array(colsCount)
       .fill(`${row}`)
-      .map(toCell(state.colState, row))
+      .map(toCell(state, row))
       .join('')
     rows.push(createRow(row, cells, state.rowState))
   }

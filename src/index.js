@@ -21,3 +21,10 @@ const excel = new Excel('#app', {
 })
 
 excel.render()
+
+const buttonDelete = document.getElementById('button-delete')
+
+buttonDelete.addEventListener('click', () => {
+  localStorage.clear()
+  location.reload()
+})

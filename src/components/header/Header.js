@@ -15,7 +15,7 @@ export class Header extends ExcelComponent {
     return `
     <input type="text" class="input" value="New table" />
     <div>
-      <div class="button">
+      <div class="button" id="button-delete">
         <i class="material-icons">delete</i>
       </div>
       <div class="button">
